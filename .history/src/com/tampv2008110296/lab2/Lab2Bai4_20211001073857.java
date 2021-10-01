@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Lab2Bai4 {
     public static void main(String[] args) {
-        var in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         int chose;
             do{
                 System.out.println("===========MENU===========");
@@ -68,6 +68,7 @@ public class Lab2Bai4 {
                 System.out.printf("x2 = %.2f.",((-b-Math.sqrt(delta))/(2*a)));
             }
             System.out.println("Nhập số bất kì để quay lại MENU.");
+            int x = sc.nextInt();
         }
         static void tinhtien()  {
             Scanner in = new Scanner(System.in);
