@@ -13,7 +13,6 @@ public class Account {
         number_account = a;
         number_balance = b;
         
-        
     }
     
 }
