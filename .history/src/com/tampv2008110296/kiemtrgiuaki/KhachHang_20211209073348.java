@@ -13,5 +13,8 @@ public abstract class KhachHang {
         this.triGiaHoaDon = triGiaHoaDon;
 
     }
-   
+    @Override
+    public void toString
+    return "tenCongTy=" + tenCongTy +" triGiaHoaDon =" + triGiaHoaDon;
+    
 }

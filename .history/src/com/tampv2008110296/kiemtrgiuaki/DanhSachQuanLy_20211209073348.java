@@ -4,8 +4,6 @@
 */
 package com.tampv2008110296.kiemtrgiuaki;
 
-import java.util.ArrayList;
-
 public class DanhSachQuanLy {
     private ArrayList<Nguoi> danhSach = new ArrayList<Nguoi>();
     public void them(Nguoi nguoi){
@@ -14,4 +12,3 @@ public class DanhSachQuanLy {
     public void inDanhSach(){
         System.out.println(danhSach);
     }
-}
