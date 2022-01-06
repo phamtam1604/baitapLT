@@ -90,7 +90,10 @@ public class HangHoa {
     }
 
 
-  
+    public HangHoa get(int i) {
+        return null;
+    }
+
    
 
 

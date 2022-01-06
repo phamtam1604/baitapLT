@@ -15,7 +15,7 @@ public class SanhSu extends HangHoa {
 
     public SanhSu(String tenHangHoa, String maHH, long donGia, String ngayNhapKho, int soLuongTonKho,
             String noiSanXuat) throws ParseException {
-        super("HSS-"+tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
+        super("Hang SS"+tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
         this.noiSanXuat = noiSanXuat;
     }
 

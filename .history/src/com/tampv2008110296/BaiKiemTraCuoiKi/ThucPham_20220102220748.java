@@ -14,7 +14,7 @@ public class ThucPham extends HangHoa {
 
     public ThucPham(String tenHangHoa, String maHH, long donGia, String ngayNhapKho, int soLuongTonKho,
             String hanSanXuat) throws ParseException {
-        super("HTP-" + tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
+        super(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
         this.hanSanXuat = chuyenChuoiSangNgay(hanSanXuat);
     }
 

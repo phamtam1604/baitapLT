@@ -13,7 +13,7 @@ public class DienMay extends HangHoa{
 
 public DienMay(String tenHangHoa, String maHH, long donGia, String ngayNhapKho, int soLuongTonKho, int congSuat)
         throws ParseException {
-    super("HDM-" + tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
+    super(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
     this.congSuat = congSuat;
 }
 

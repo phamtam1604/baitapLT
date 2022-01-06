@@ -6,32 +6,28 @@ package com.tampv2008110296.BaiKiemTraCuoiKi;
 
 import java.security.PublicKey;
 import java.sql.Date;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import javax.management.loading.PrivateClassLoader;
 import java.util.Comparator;
+
 import com.tampv2008110296.kiemtrgiuaki.DanhSachQuanLy;
 import com.tampv2008110296.lab1.scanner;
 
-
-
-
 public class SieuThi {
-    private static final int Compartor = 0;
     private ArrayList<HangHoa> danhSach;
-   
-    //private static final int Comparator;
-    private Scanner sc = new Scanner(System.in);
-    private int j;
-    private int count;
     public SieuThi(){
-        danhSach = new ArrayList<HangHoa>(30);
+        danhSach = new ArrayList<HangHoa>(20);
     }
+    private Scanner sc = new Scanner(System.in);
+
     public ArrayList<HangHoa> getDanhSach(){
         return danhSach;
+    }
+
+    public void setDanhSach(ArrayList<HangHoa> danhSach) {
+        this.danhSach = danhSach;
     }
 
  // thêm hàng hóa
@@ -40,7 +36,7 @@ public class SieuThi {
         for(int i = 0; i < danhSach.size() ; i++){
             HangHoa hh = danhSach.get(i);
             if(hh.getMaHH().equalsIgnoreCase(a.getMaHH()) ||
-            hh.getMaHH().equalsIgnoreCase("HTP-")|| hh.getMaHH().equalsIgnoreCase("HSS-") || hh.getMaHH().equalsIgnoreCase("HDM-") ){
+            hh.getMaHH().equalsIgnoreCase("Hang TP")|| hh.getMaHH().equalsIgnoreCase("Hang SS") || hh.getMaHH().equalsIgnoreCase("Hang DM") ){
             System.out.println("Xin vui long thu lai!!!");
             count++ ;
             themHangHoa();
@@ -66,7 +62,7 @@ public class SieuThi {
         switch(luaChon){ 
             case 1: {
                 // lựa chọn 1 để nhập thông tin cho nghành hàng thực phẩm
-                System.out.println("\n\nNhap thong tin hang hoa THUC PHAM");
+                System.out.println("\n\nntNhap thong tin hang hoa");
                 System.out.println("Nhap ma hang hoa:");
                 sc.nextLine();
                 String maHH = sc.nextLine();
@@ -88,7 +84,7 @@ public class SieuThi {
             }
             case 2: {
                 // lựa chọn 2 để thêm hàng hóa cho ngành điện máy
-                System.out.println("Nhap thong tin hang hoa DIEN MAY");
+                System.out.println("\n\n\tNhap thong tin hang hoa dien may");
                 System.out.print("Nhap ma hang hoa : ");
 				sc.nextLine();
 				String maHH = sc.nextLine();
@@ -130,72 +126,30 @@ public class SieuThi {
         }
     }
     public void suaHangHoa() throws ParseException{
-        System.out.print("Nhap ma hang hoa cua hang can sua : ");
+        System.out.println("Nhap ma hang hoa ban muon sua:");
         String maHH = sc.nextLine();
-        for(int i = 0 ; i< danhSach.size();i++){
+        for(int i = 0; i< danhSach.size(); i++){
             HangHoa a = danhSach.get(i);
-        int count=0;
-        if(a.getMaHH().equals(maHH)){
+            Object maHang;
+            if( a.getMaHH().equals(maHang)){
             if(a instanceof ThucPham){
-                String[] mahanghoa = maHH.split("=====",2);
-                System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
-                System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
-                System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
-                System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
-                System.out.println("Nhap ngay het han");
-                String hanSanXuat = sc.nextLine();
-                HangHoa x = new ThucPham(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, hanSanXuat);
-                danhSach.add(danhSach.indexOf(a), x);
-                danhSach.remove(a);
+                String[] mahang = maHang.split("=============",2);
+                System.out.print("Nhap ten hang hoa: ");
+                    String tenHangHoa = sc.nextLine();
+                    System.out.print("Nhap so luong ton kho: ");
+                    int soLuongTonKho = sc.nextInt();
+                    System.out.print("Nhap don gia: ");
+                    int donGia = sc.nextInt();	
+                    System.out.print("Nhap ngay nhap kho: ");
+                    String ngayNhapKho =sc.nextLine();
+                   
+                    System.out.print("Nhap ngay het han: ");
             }
-            else if(a instanceof SanhSu){
-                String[] mahanghoa = maHH.split("=====",2);
-                System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
-                System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
-                System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
-                System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
-                System.out.println("Nhap noi san xuat");
-                String noiSanXuat = sc.nextLine();
-                HangHoa x = new SanhSu(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, noiSanXuat);
-                danhSach.add(danhSach.indexOf(a),x);
-                danhSach.remove(a);
-              }
-              else if(a instanceof DienMay){
-                String[] mahanghoa = maHH.split("=====",2);
-                System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
-                System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
-                System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
-                System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
-                int congSuat = sc.nextInt();
-                HangHoa x = new DienMay(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, congSuat);
-               danhSach.add(danhSach.indexOf(a),x );
-               danhSach.remove(a);
-             }
-           }
-          else count++;
-        }  if(count == danhSach.size()){
-            System.out.println("Khong co ma hang " + maHH + " trong danh sach !!! Enter de nhap lai !!!");
-            suaHangHoa();
+         }
         }
     }
     
-     public void xoaHangHoa()  {
-
+     public void xoaHangHoa(){
          System.out.println("Nhap hang hoa can xoa");
          String maHH = sc.nextLine();
          for(int i = 0; i<danhSach.size(); i++){
@@ -452,137 +406,8 @@ public void sapXepHangHoaGiamDanTheoNgay(){
             }
         }
     });
-   } 
-     public void timKiemTheoLoai(){
-         int luaChon =0;
-         System.out.println("1.Thuc Pham");
-         System.out.println("2.Sanh Su");
-         System.out.println("3.Dien May");
-         System.out.println("Vui long nhap lua chon:");
-         luaChon = sc.nextInt();
-         switch(luaChon){
-             case 1: {System.out.println("Hang Thuc Pham");
-            xuatThucPham();
-            break;
-           }
-            case 2: {System.out.println("Hang Sanh Su");
-            xuatSanhSu();
-            break;         
-           }
-           case 3 : {System.out.println("Hang Dien May");
-            xuatDienMay();
-            break;}
-         }
-     }
-     
-    
-    
-    
-   DecimalFormat ft = new DecimalFormat("###,###,### VND");
-   
-   public void thongKeTongHangHoa(){
-        long tongSoLuong = 0 ,tongChiPhi = 0;
-    for(HangHoa hangHoa : danhSach){
-        tongSoLuong += hangHoa.getSoLuongTonKho();
-        tongChiPhi += hangHoa.tinhTien();
-    } 
 }
 
-public void thongKeTheoLoaiHangHoa(){
-    long tongSoLuongTP = 0;
-    long tongSoLuongSS = 0;
-    long tongSoLuongDM = 0;
-    for(int i = 0 ; i < danhSach.size() ; i++){
-        HangHoa x = danhSach.get(i);
-        if(x instanceof ThucPham){     
-            tongSoLuongTP+=x.getSoLuongTonKho();
-        }
-        else if(x instanceof SanhSu){           
-            tongSoLuongSS+=x.getSoLuongTonKho();
-        }
-        else if(x instanceof DienMay){              
-            tongSoLuongDM+=x.getSoLuongTonKho();
-        }
-    }
-    System.out.println("=============MENU=============");
-    System.out.println("|        1.Thuc Pham         |");
-    System.out.println("|        2.Sanh Su           |");
-    System.out.println("|        3.Dien May          |");
-    System.out.println("|        0.Quay lai          |");
-    System.out.println("==============================");
-    System.out.print("Nhap lua chon loai hang hoa : ");
-    int luaChon = sc.nextInt();
-    switch(luaChon){
-        case 1 : {
-            for (int i =0; i< 100; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-8s|%-15s|%-10s|%-15s|%-15s|%-15s|\n","Ma Hang","Ten Hang Hoa","So Luong ","Gia ","Ngay Nhap Kho","Tong gia tri");
-            for (int i =0; i< 100; i++) {
-                System.out.print("-");
-            }
-            xuatThucPham();
-            System.out.println();
-            for (int i =0; i< 100; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-35s|%-47d|\n","Tong so luong",tongSoLuongTP);
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            break;
-        }
-        case 2 : {
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-8s|%-15s|%-10s|%-15s|%-15s|%-15s|\n","Ma Hang","Ten Hang Hoa","So Luong ","Gia ","Ngay Nhap Kho","Tong gia tri");
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            xuatSanhSu();
-            System.out.println();
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-34s|%-47d|\n","Tong so luong",tongSoLuongSS);
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            
-            System.out.println();
-            break;
-        }
-        case 3 : {
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-8s|%-15s|%-10s|%-15s|%-15s|%-15s|\n","Ma Hang","Ten Hang Hoa","So Luong ","Gia ","Ngay Nhap Kho","Tong gia tri");
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            xuatDienMay();
-            System.out.println();
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-35s|%-47d|\n","Tong so luong",tongSoLuongDM);
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            
-            System.out.println();
-            break;
 
-        }
-    }
-}
 
 }

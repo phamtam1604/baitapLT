@@ -6,6 +6,7 @@ package com.tampv2008110296.BaiKiemTraCuoiKi;
 
 import java.util.Date;
 import java.text.ParseException;
+import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.text.DecimalFormat;
 
@@ -19,17 +20,15 @@ public class HangHoa {
     private int soLuongTonKho;
 
     
-    public HangHoa(String tenHangHoa, String maHH, long donGia2, String ngayNhapKho, int soLuongTonKho2) throws ParseException {
+    public HangHoa(String tenHangHoa, String maHH, long donGia, Date ngayNhapKho, int soLuongTonKho) throws ParseException {
         this.tenHangHoa = tenHangHoa;
         this.maHH = maHH;
         this.donGia = donGia;
-        this.ngayNhapKho = chuyenChuoiSangNgay(ngayNhapKho);
-        this.soLuongTonKho = soLuongTonKho2;
+        this.ngayNhapKho = ngayNhapKho;
+        this.soLuongTonKho = soLuongTonKho;
     }
 
    
-   
-
     // phương thức tính tiền 
     public long tinhTien(){
         return(long)(getSoLuongTonKho()*getDonGia());
@@ -89,8 +88,6 @@ public class HangHoa {
                 + ", soLuongTonKho=" + soLuongTonKho + ", tenHangHoa=" + tenHangHoa + "]";
     }
 
-
-  
    
 
 

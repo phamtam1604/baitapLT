@@ -16,9 +16,6 @@ import java.util.Comparator;
 import com.tampv2008110296.kiemtrgiuaki.DanhSachQuanLy;
 import com.tampv2008110296.lab1.scanner;
 
-
-
-
 public class SieuThi {
     private static final int Compartor = 0;
     private ArrayList<HangHoa> danhSach;
@@ -26,7 +23,6 @@ public class SieuThi {
     //private static final int Comparator;
     private Scanner sc = new Scanner(System.in);
     private int j;
-    private int count;
     public SieuThi(){
         danhSach = new ArrayList<HangHoa>(30);
     }
@@ -134,7 +130,7 @@ public class SieuThi {
         String maHH = sc.nextLine();
         for(int i = 0 ; i< danhSach.size();i++){
             HangHoa a = danhSach.get(i);
-        int count=0;
+        int count;
         if(a.getMaHH().equals(maHH)){
             if(a instanceof ThucPham){
                 String[] mahanghoa = maHH.split("=====",2);
@@ -187,12 +183,9 @@ public class SieuThi {
                danhSach.remove(a);
              }
            }
-          else count++;
-        }  if(count == danhSach.size()){
-            System.out.println("Khong co ma hang " + maHH + " trong danh sach !!! Enter de nhap lai !!!");
-            suaHangHoa();
-        }
+          else
     }
+    
     
      public void xoaHangHoa()  {
 
@@ -475,114 +468,19 @@ public void sapXepHangHoaGiamDanTheoNgay(){
          }
      }
      
-    
-    
-    
+
+
+
    DecimalFormat ft = new DecimalFormat("###,###,### VND");
-   
-   public void thongKeTongHangHoa(){
+    public void thongKeTongHangHoa(){
         long tongSoLuong = 0 ,tongChiPhi = 0;
     for(HangHoa hangHoa : danhSach){
         tongSoLuong += hangHoa.getSoLuongTonKho();
         tongChiPhi += hangHoa.tinhTien();
     } 
-}
 
-public void thongKeTheoLoaiHangHoa(){
-    long tongSoLuongTP = 0;
-    long tongSoLuongSS = 0;
-    long tongSoLuongDM = 0;
-    for(int i = 0 ; i < danhSach.size() ; i++){
-        HangHoa x = danhSach.get(i);
-        if(x instanceof ThucPham){     
-            tongSoLuongTP+=x.getSoLuongTonKho();
-        }
-        else if(x instanceof SanhSu){           
-            tongSoLuongSS+=x.getSoLuongTonKho();
-        }
-        else if(x instanceof DienMay){              
-            tongSoLuongDM+=x.getSoLuongTonKho();
-        }
     }
-    System.out.println("=============MENU=============");
-    System.out.println("|        1.Thuc Pham         |");
-    System.out.println("|        2.Sanh Su           |");
-    System.out.println("|        3.Dien May          |");
-    System.out.println("|        0.Quay lai          |");
-    System.out.println("==============================");
-    System.out.print("Nhap lua chon loai hang hoa : ");
-    int luaChon = sc.nextInt();
-    switch(luaChon){
-        case 1 : {
-            for (int i =0; i< 100; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-8s|%-15s|%-10s|%-15s|%-15s|%-15s|\n","Ma Hang","Ten Hang Hoa","So Luong ","Gia ","Ngay Nhap Kho","Tong gia tri");
-            for (int i =0; i< 100; i++) {
-                System.out.print("-");
-            }
-            xuatThucPham();
-            System.out.println();
-            for (int i =0; i< 100; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-35s|%-47d|\n","Tong so luong",tongSoLuongTP);
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            break;
-        }
-        case 2 : {
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-8s|%-15s|%-10s|%-15s|%-15s|%-15s|\n","Ma Hang","Ten Hang Hoa","So Luong ","Gia ","Ngay Nhap Kho","Tong gia tri");
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            xuatSanhSu();
-            System.out.println();
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-34s|%-47d|\n","Tong so luong",tongSoLuongSS);
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            
-            System.out.println();
-            break;
-        }
-        case 3 : {
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-8s|%-15s|%-10s|%-15s|%-15s|%-15s|\n","Ma Hang","Ten Hang Hoa","So Luong ","Gia ","Ngay Nhap Kho","Tong gia tri");
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            xuatDienMay();
-            System.out.println();
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
-            System.out.printf("|%-35s|%-47d|\n","Tong so luong",tongSoLuongDM);
-            for (int i =0; i< 85; i++) {
-                System.out.print("-");
-            }
-            
-            System.out.println();
-            break;
 
-        }
-    }
-}
+
 
 }

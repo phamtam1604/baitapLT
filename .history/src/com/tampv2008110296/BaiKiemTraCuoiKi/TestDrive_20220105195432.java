@@ -74,8 +74,6 @@ public class TestDrive {
         System.out.println("|               7. Sap xep hang hoa giam dan theo ngay      |");
         System.out.println("|               8. Sap xep hang hoa tang dan theo ngay      |");
         System.out.println("|               9. Thong ke hang hoa                        |");
-        System.out.println("|               10. Thong ke tung loại hang hoa             |");
-        System.out.println("|               11. Thong ke tong hang hoa                  |");
         System.out.println("|               0. Thoat chuong trinh                       |");
         System.out.println("|           ============================================    |");
         System.out.println("|               Mời bạn nhập lựa chọn?                      |");   
@@ -92,8 +90,7 @@ public class TestDrive {
         case 7: st.sapXepHangHoaGiamDanTheoNgay();break;
         case 8: st.sapXepHangHoaTangDanTheoNgay();break;
         case 9: st.thongKeTongHangHoa();break;
-        case 10: st.thongKeTheoLoaiHangHoa();;break;
-        case 11: st.thongKeTongHangHoa();break;
+        case 10: st.thongKeTongHangHoa();break;
         default : break;
        }        
     } while (chon !=0);

@@ -6,6 +6,7 @@ package com.tampv2008110296.BaiKiemTraCuoiKi;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class DienMay extends HangHoa{
 
@@ -13,7 +14,7 @@ public class DienMay extends HangHoa{
 
 public DienMay(String tenHangHoa, String maHH, long donGia, String ngayNhapKho, int soLuongTonKho, int congSuat)
         throws ParseException {
-    super("HDM-" + tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
+    super(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
     this.congSuat = congSuat;
 }
 

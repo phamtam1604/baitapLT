@@ -6,14 +6,15 @@ package com.tampv2008110296.BaiKiemTraCuoiKi;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class DienMay extends HangHoa{
 
    private int congSuat;
 
-public DienMay(String tenHangHoa, String maHH, long donGia, String ngayNhapKho, int soLuongTonKho, int congSuat)
+public DienMay(String tenHangHoa, String maHH, long donGia, java.util.Date ngayNhapKho, int soLuongTonKho, int congSuat)
         throws ParseException {
-    super("HDM-" + tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
+    super(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho);
     this.congSuat = congSuat;
 }
 
