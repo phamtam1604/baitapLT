@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.function.IntUnaryOperator;
+
 import javax.management.loading.PrivateClassLoader;
 import java.util.Comparator;
 import com.tampv2008110296.kiemtrgiuaki.DanhSachQuanLy;
@@ -22,25 +24,24 @@ import com.tampv2008110296.lab1.scanner;
 public class SieuThi {
     private static final int Compartor = 0;
     private ArrayList<HangHoa> danhSach;
-   
-    //private static final int Comparator;
-    private Scanner sc = new Scanner(System.in);
-    private int j;
-    private int count;
-    public SieuThi(){
+    private Scanner input = new Scanner(System.in);
+  
+    SieuThi(){
         danhSach = new ArrayList<HangHoa>(30);
     }
     public ArrayList<HangHoa> getDanhSach(){
         return danhSach;
     }
-
- // thêm hàng hóa
+    public void setDanhSach(ArrayList<HangHoa> danhSach) {
+        this.danhSach = danhSach;
+    }
+    // thêm hàng hóa
     public void themHangHoa(HangHoa a) throws ParseException{
         int count = 0;
         for(int i = 0; i < danhSach.size() ; i++){
-            HangHoa hh = danhSach.get(i);
-            if(hh.getMaHH().equalsIgnoreCase(a.getMaHH()) ||
-            hh.getMaHH().equalsIgnoreCase("HTP-")|| hh.getMaHH().equalsIgnoreCase("HSS-") || hh.getMaHH().equalsIgnoreCase("HDM-") ){
+            HangHoa sp = danhSach.get(i);
+            if(sp.getMaHH().equalsIgnoreCase(a.getMaHH()) ||
+            sp.getMaHH().equalsIgnoreCase("HTP-")|| sp.getMaHH().equalsIgnoreCase("HSS-") || sp.getMaHH().equalsIgnoreCase("HDM-") ){
             System.out.println("Xin vui long thu lai!!!");
             count++ ;
             themHangHoa();
@@ -53,35 +54,32 @@ public class SieuThi {
  }
 
     public void themHangHoa() throws ParseException {
-        System.out.println("==========Helloooooo===========");
-        System.out.println("=============MENU=============");
         System.out.println("1.Hang thuc pham          ");
         System.out.println("2.Hang sanh su             ");
         System.out.println("3.Hang dien may            ");
 		System.out.println(" 0.Thoat                 ");
-        System.out.println("=============MENU=============");
         System.out.print("Vui long chon chuc nang : ");
-    	int luaChon = sc.nextInt();
+    	int luaChon = input.nextInt();
         HangHoa a;
         switch(luaChon){ 
             case 1: {
                 // lựa chọn 1 để nhập thông tin cho nghành hàng thực phẩm
                 System.out.println("\n\nNhap thong tin hang hoa THUC PHAM");
                 System.out.println("Nhap ma hang hoa:");
-                sc.nextLine();
-                String maHH = sc.nextLine();
+                input.nextLine();
+                String maHH = input.nextLine();
                 System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
+                String tenHangHoa = input.nextLine();
                 System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
+                int soLuongTonKho = input.nextInt();
                 System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
+                int donGia = input.nextInt();
                 System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
+                input.nextLine();
+				String ngayNhapKho = input.nextLine();
                 System.out.println("Nhap ngay het han");
                
-                String hanSanXuat = sc.nextLine();
+                String hanSanXuat = input.nextLine();
                 a = new ThucPham(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, hanSanXuat);
                 themHangHoa(a);
                 break;
@@ -90,18 +88,18 @@ public class SieuThi {
                 // lựa chọn 2 để thêm hàng hóa cho ngành điện máy
                 System.out.println("Nhap thong tin hang hoa DIEN MAY");
                 System.out.print("Nhap ma hang hoa : ");
-				sc.nextLine();
-				String maHH = sc.nextLine();
+				input.nextLine();
+				String maHH = input.nextLine();
 				System.out.print("Nhap ten hag hoa : ");
-				String tenHangHoa = sc.nextLine();
+				String tenHangHoa = input.nextLine();
 				System.out.print("Nhap so luong hang ton kho : ");
-				int soLuongTonKho = sc.nextInt();
+				int soLuongTonKho = input.nextInt();
 				System.out.print("Nhap don gia (vnd) : ");
-				int donGia = sc.nextInt();				
+				int donGia = input.nextInt();				
 				System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                String ngayNhapKho = sc.nextLine();
+                String ngayNhapKho = input.nextLine();
                 System.out.println("Nhap cong suat cua hang hoa");
-                int congSuat = sc.nextInt();
+                int congSuat = input.nextInt();
                 a = new DienMay(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, congSuat);
                 themHangHoa(a);
                 break;
@@ -110,18 +108,18 @@ public class SieuThi {
                 // lựa chọn 3 để thêm hàng hóa cho nghành Sành sứ
                 System.out.println("\n\n\tNhap thong tin hang hoa sanh su: "); 
                 System.out.print("Nhap ma hang hoa : ");
-				sc.nextLine();
-                String maHH = sc.nextLine();
+				input.nextLine();
+                String maHH = input.nextLine();
 				System.out.print("Nhap ten hang hoa (khong dau) : ");
-				String tenHangHoa = sc.nextLine();
+				String tenHangHoa = input.nextLine();
 				System.out.print("Nhap so luong ton kho : ");
-				int soLuongTonKho = sc.nextInt();
+				int soLuongTonKho = input.nextInt();
 				System.out.print("Nhap don gia (vnd) : ");
-				int donGia = sc.nextInt();				
+				int donGia = input.nextInt();				
 				System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                String ngayNhapKho = sc.nextLine();
+                String ngayNhapKho = input.nextLine();
                 System.out.println("Nhap noi san xuat");
-                String noiSanXuat = sc.nextLine();
+                String noiSanXuat = input.nextLine();
                 a = new SanhSu(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, noiSanXuat);
                 themHangHoa(a);
                 break;
@@ -131,7 +129,7 @@ public class SieuThi {
     }
     public void suaHangHoa() throws ParseException{
         System.out.print("Nhap ma hang hoa cua hang can sua : ");
-        String maHH = sc.nextLine();
+        String maHH = input.nextLine();
         for(int i = 0 ; i< danhSach.size();i++){
             HangHoa a = danhSach.get(i);
         int count=0;
@@ -139,16 +137,16 @@ public class SieuThi {
             if(a instanceof ThucPham){
                 String[] mahanghoa = maHH.split("=====",2);
                 System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
+                String tenHangHoa = input.nextLine();
                 System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
+                int soLuongTonKho = input.nextInt();
                 System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
+                int donGia = input.nextInt();
                 System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
+                input.nextLine();
+				String ngayNhapKho = input.nextLine();
                 System.out.println("Nhap ngay het han");
-                String hanSanXuat = sc.nextLine();
+                String hanSanXuat = input.nextLine();
                 HangHoa x = new ThucPham(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, hanSanXuat);
                 danhSach.add(danhSach.indexOf(a), x);
                 danhSach.remove(a);
@@ -156,16 +154,16 @@ public class SieuThi {
             else if(a instanceof SanhSu){
                 String[] mahanghoa = maHH.split("=====",2);
                 System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
+                String tenHangHoa = input.nextLine();
                 System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
+                int soLuongTonKho = input.nextInt();
                 System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
+                int donGia = input.nextInt();
                 System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
+                input.nextLine();
+				String ngayNhapKho = input.nextLine();
                 System.out.println("Nhap noi san xuat");
-                String noiSanXuat = sc.nextLine();
+                String noiSanXuat = input.nextLine();
                 HangHoa x = new SanhSu(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, noiSanXuat);
                 danhSach.add(danhSach.indexOf(a),x);
                 danhSach.remove(a);
@@ -173,22 +171,23 @@ public class SieuThi {
               else if(a instanceof DienMay){
                 String[] mahanghoa = maHH.split("=====",2);
                 System.out.println("Nhap ten hang hoa:");
-                String tenHangHoa = sc.nextLine();
+                String tenHangHoa = input.nextLine();
                 System.out.println("Nhap so luong ton kho:");
-                int soLuongTonKho = sc.nextInt();
+                int soLuongTonKho = input.nextInt();
                 System.out.println("Nhap don gia (VNĐ):");
-                int donGia = sc.nextInt();
+                int donGia = input.nextInt();
                 System.out.print("Nhap ngay nhap kho (dd/mm/yyyy) : ");
-                sc.nextLine();
-				String ngayNhapKho = sc.nextLine();
-                int congSuat = sc.nextInt();
+                input.nextLine();
+				String ngayNhapKho = input.nextLine();
+                int congSuat = input.nextInt();
                 HangHoa x = new DienMay(tenHangHoa, maHH, donGia, ngayNhapKho, soLuongTonKho, congSuat);
                danhSach.add(danhSach.indexOf(a),x );
                danhSach.remove(a);
              }
            }
           else count++;
-        }  if(count == danhSach.size()){
+        }  int count =0;
+        if(count == danhSach.size()){
             System.out.println("Khong co ma hang " + maHH + " trong danh sach !!! Enter de nhap lai !!!");
             suaHangHoa();
         }
@@ -197,7 +196,7 @@ public class SieuThi {
      public void xoaHangHoa()  {
 
          System.out.println("Nhap hang hoa can xoa");
-         String maHH = sc.nextLine();
+         String maHH = input.nextLine();
          for(int i = 0; i<danhSach.size(); i++){
              HangHoa a = danhSach.get(i);
              if(a.getMaHH().equals(maHH)){
@@ -453,13 +452,149 @@ public void sapXepHangHoaGiamDanTheoNgay(){
         }
     });
    } 
+   public void SapXepTangDanTheoLoaiVaTheoNgayNhap(){
+    ArrayList<HangHoa> list1 = new ArrayList<HangHoa>();
+    ArrayList<HangHoa> list2 = new ArrayList<HangHoa>();
+    ArrayList<HangHoa> list3 = new ArrayList<HangHoa>();
+    for(int i = 0 ; i < danhSach.size() ; i++){
+        HangHoa x = danhSach.get(i);
+        if(x instanceof ThucPham){
+            list1.add(x);
+        }
+        else if(x instanceof SanhSu){
+            list2.add(x);
+        }
+        else if(x instanceof DienMay){
+            list3.add(x);
+        }
+    }
+    Collections.sort(list1,new Comparator<HangHoa>(){
+        @Override
+        public int compare(HangHoa o1, HangHoa o2) {
+            if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) < 0){
+                return -1 ;
+            }
+            else {
+                if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) == 0){
+                    return 0 ;
+                }
+                else {
+                    return 1 ;
+                }
+            }
+        }
+    });
+    xuatThucPhamTheoDanhSach(list1);
+    Collections.sort(list2,new Comparator<HangHoa>(){
+        @Override
+        public int compare(HangHoa o1, HangHoa o2) {
+            if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) < 0){
+                return -1 ;
+            }
+            else {
+                if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) == 0){
+                    return 0 ;
+                }
+                else {
+                    return 1 ;
+                }
+            }
+        }
+    });
+    xuatSanhSuTheoDanhSach(list2);
+    Collections.sort(list3,new Comparator<HangHoa>(){
+        @Override
+        public int compare(HangHoa o1, HangHoa o2) {
+            if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) < 0){
+                return -1 ;
+            }
+            else {
+                if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) == 0){
+                    return 0 ;
+                }
+                else {
+                    return 1 ;
+                }
+            }
+        }
+    });
+    xuatDienMayTheoDanhSach(list3);
+}
+public void SapXepGiamDanTheoLoaiVaTheoNgayNhap(){
+    ArrayList<HangHoa> list1 = new ArrayList<HangHoa>();
+    ArrayList<HangHoa> list2 = new ArrayList<HangHoa>();
+    ArrayList<HangHoa> list3 = new ArrayList<HangHoa>();
+    for(int i = 0 ; i < danhSach.size() ; i++){
+        HangHoa x = danhSach.get(i);
+        if(x instanceof ThucPham){
+            list1.add(x);
+        }
+        else if(x instanceof SanhSu){
+            list2.add(x);
+        }
+        else if(x instanceof DienMay){
+            list3.add(x);
+        }
+    }
+    Collections.sort(list1,new Comparator<HangHoa>(){
+        @Override
+        public int compare(HangHoa o1, HangHoa o2) {
+            if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) < 0){
+                return 1 ;
+            }
+            else {
+                if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) == 0){
+                    return 0 ;
+                }
+                else {
+                    return -1 ;
+                }
+            }
+        }
+    });
+    xuatThucPhamTheoDanhSach(list1);
+    Collections.sort(list2,new Comparator<HangHoa>(){
+        @Override
+        public int compare(HangHoa o1, HangHoa o2) {
+            if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) < 0){
+                return 1 ;
+            }
+            else {
+                if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) == 0){
+                    return 0 ;
+                }
+                else {
+                    return -1 ;
+                }
+            }
+        }
+    });
+    xuatSanhSuTheoDanhSach(list2);
+    Collections.sort(list3,new Comparator<HangHoa>(){
+        @Override
+        public int compare(HangHoa o1, HangHoa o2) {
+            if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) < 0){
+                return 1 ;
+            }
+            else {
+                if(o1.getNgayNhapKho().compareTo(o2.getNgayNhapKho()) == 0){
+                    return 0 ;
+                }
+                else {
+                    return -1 ;
+                }
+            }
+        }
+    });
+    xuatDienMayTheoDanhSach(list3);
+}
      public void timKiemTheoLoai(){
          int luaChon =0;
          System.out.println("1.Thuc Pham");
          System.out.println("2.Sanh Su");
          System.out.println("3.Dien May");
          System.out.println("Vui long nhap lua chon:");
-         luaChon = sc.nextInt();
+         luaChon = input.nextInt();
          switch(luaChon){
              case 1: {System.out.println("Hang Thuc Pham");
             xuatThucPham();
@@ -511,7 +646,7 @@ public void thongKeTheoLoaiHangHoa(){
     System.out.println("|        0.Quay lai          |");
     System.out.println("==============================");
     System.out.print("Nhap lua chon loai hang hoa : ");
-    int luaChon = sc.nextInt();
+    int luaChon = input.nextInt();
     switch(luaChon){
         case 1 : {
             for (int i =0; i< 100; i++) {
